@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "entity.h"
 using namespace std;
 
@@ -47,7 +48,9 @@ entity::entity(const entity &obj){
     cout<<"Copy Constructor Running...";
 }
 
-entity::~entity(){}
+entity::~entity(){
+    delete [] abilities;
+}
 
 entity& entity::setName(string name){
     this-> name = name;
@@ -109,3 +112,39 @@ int entity::getHealth(){
 string entity::getAbilities(){
     return abilities[aCount];
 };
+
+entity entity::getFromFile(){
+    ifstream fin("entity.txt");
+    for (int i = 0; i < entityCount; i++)
+    {
+        fin>>name>>color>>age>>height>>weight>>health;
+        for (int i = 0; i <aCount ; i++)
+        {
+            fin>>abilities[i];
+        }   
+    }
+}
+
+int entity::totalEntites(){
+    return entityCount;
+}
+
+void entity::display(){
+    cout<<"--------------------------"<<endl;
+    cout<<"    CHARACTER DISPLAY"<<endl;
+    cout<<"--------------------------"<<endl;
+    cout<<"Name: "<<name<<endl;
+    cout<<"Color: "<<color<<endl;
+    cout<<"Age: "<<age<<endl;
+    cout<<"Height: "<<height<<endl;
+    cout<<"Weight: "<<weight<<endl;
+    cout<<"Health: "<<health<<endl;
+    cout<<"--------------------------"<<endl;
+    cout<<"Abilities:"<<endl;
+    for (int i = 0; i < aCount; i++)
+    {
+        cout<<"Ability-["<<i+1<<"]"<<abilities[i]<<endl;
+    }
+    cout<<"      END OF DISPLAY"<<endl;
+    cout<<"--------------------------"<<endl;
+}
