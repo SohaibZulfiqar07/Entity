@@ -17,7 +17,7 @@ class entity{
 
   public:
   entity();
-  entity(string, string, int, float, float, int, const int,int);
+  entity(string, string, int, float, float, int, const int,string[]);
   entity(const entity &obj);
   ~entity();
 
@@ -27,7 +27,7 @@ class entity{
   entity& setHeight(float);
   entity& setWeight(float);
   entity& setHealth(int);
-  entity& setAbilities(const int);
+  entity& setAbilities(int, string[]);
   entity& setAbilityCount(int);
   
   string getName();

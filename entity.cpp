@@ -17,15 +17,15 @@ entity::entity(){
     cout<<"Default Constructor Running...";
 }
 
-entity::entity(string n, string c, int a, float h, float w, int hp, const int x, int abc){
+entity::entity(string n, string c, int a, float h, float w, int hp,int x, string ab[]){
     entity::setName(n);
     entity::setColor(c);
     entity::setAge(a);
     entity::setHeight(h);
     entity::setWeight(w);
     entity::setHealth(hp);
-    entity::setAbilities(x);
-    entity::setAbilityCount(abc);
+    entity::setAbilities(x,ab);
+    entity::setAbilityCount(x);
     entityCount++;
     cout<<"Parameterized Constructor Running...";
 }
@@ -48,3 +48,64 @@ entity::entity(const entity &obj){
 }
 
 entity::~entity(){}
+
+entity& entity::setName(string name){
+    this-> name = name;
+    return *this;
+}
+entity& entity::setColor(string color){
+    this-> color = color;
+    return *this;
+}
+entity& entity::setAge(int age){
+    this-> age = age;
+    return *this;
+}
+entity& entity::setHeight(float height){
+    this-> height;
+    return *this;
+}
+entity& entity::setWeight(float weight){
+    this-> weight;
+    return *this;
+}
+entity& entity::setHealth(int health){
+    this-> health = health;
+    return *this;
+}
+entity& entity::setAbilities(const int x, string abilities[]){
+    aCount = x;
+    abilities = new string[aCount];
+    for (int i = 0; i < aCount; i++)
+    {
+     this-> abilities[i] = abilities[i];
+    }
+    
+    return *this;
+}
+entity& entity::setAbilityCount(int aCount){
+    this-> aCount = aCount;
+    return *this;
+}
+
+string entity::getName(){
+    return name;
+};
+string entity::getColor(){
+    return color;
+};
+int entity::getAge(){
+    return age;
+};
+float entity::getHeight(){
+    return height;
+};
+float entity::getWeight(){
+    return weight;
+};
+int entity::getHealth(){
+    return health;
+};
+string entity::getAbilities(){
+    return abilities[aCount];
+};
