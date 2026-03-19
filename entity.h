@@ -38,7 +38,7 @@ class entity{
   int getHealth();
   string getAbilities();
 
-  entity getFromFile();
+  void getFromFile();
 
   static int totalEntites();
   

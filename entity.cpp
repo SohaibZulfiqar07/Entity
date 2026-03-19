@@ -18,15 +18,15 @@ entity::entity(){
     cout<<"Default Constructor Running...";
 }
 
-entity::entity(string n, string c, int a, float h, float w, int hp,int x, string ab[]){
+entity::entity(string n, string c, int a, float h, float w, int hp,int aCount, string abilities[]){
     entity::setName(n);
     entity::setColor(c);
     entity::setAge(a);
     entity::setHeight(h);
     entity::setWeight(w);
     entity::setHealth(hp);
-    entity::setAbilities(x,ab);
-    entity::setAbilityCount(x);
+    entity::setAbilities(aCount,abilities);
+    entity::setAbilityCount(aCount);
     entityCount++;
     cout<<"Parameterized Constructor Running...";
 }
@@ -65,11 +65,11 @@ entity& entity::setAge(int age){
     return *this;
 }
 entity& entity::setHeight(float height){
-    this-> height;
+    this-> height = height;
     return *this;
 }
 entity& entity::setWeight(float weight){
-    this-> weight;
+    this-> weight = weight;
     return *this;
 }
 entity& entity::setHealth(int health){
@@ -113,7 +113,7 @@ string entity::getAbilities(){
     return abilities[aCount];
 };
 
-entity entity::getFromFile(){
+void entity::getFromFile(){
     ifstream fin("entity.txt");
     for (int i = 0; i < entityCount; i++)
     {
