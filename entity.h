@@ -17,7 +17,7 @@ class entity{
 
   public:
   entity();
-  entity(string, string, int, float, float, int, const int,string[]);
+  entity(string, string, int, float, float, int, const int);
   entity(const entity &obj);
   ~entity();
 
@@ -36,9 +36,10 @@ class entity{
   float getHeight();
   float getWeight();
   int getHealth();
-  string getAbilities();
+  string* getAbilities();
 
   void getFromFile();
+  void writeToFile();
 
   static int totalEntites();
   

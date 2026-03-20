@@ -4,7 +4,7 @@
 using namespace std;
 
 int entity::entityCount = 0;
-
+ 
 entity::entity(){
     name = "Not_Set";   
     color = "Not_Set";   
@@ -16,19 +16,30 @@ entity::entity(){
     abilities = nullptr;
     entityCount++;
     cout<<"Default Constructor Running...";
+    cout<<"--------------------------"<<endl;
 }
 
-entity::entity(string n, string c, int a, float h, float w, int hp,int aCount, string abilities[]){
+entity::entity(string n, string c, int a, float h, float w, int hp,int aCount){
     entity::setName(n);
     entity::setColor(c);
     entity::setAge(a);
     entity::setHeight(h);
     entity::setWeight(w);
     entity::setHealth(hp);
-    entity::setAbilities(aCount,abilities);
+    string* tempArr = new string[aCount];
+    cout<<"For Entity#"<<entityCount+1<<": "<<endl;
+    for (int i = 0; i < aCount; i++)
+    {
+        cout<<"Enter Ability["<<i+1<<"]: ";
+        cin>>tempArr[i];
+    }
+
+    entity::setAbilities(aCount,tempArr);
     entity::setAbilityCount(aCount);
     entityCount++;
-    cout<<"Parameterized Constructor Running...";
+    delete [] tempArr;
+    cout<<"Parameterized Constructor Ran"<<endl;
+    cout<<"--------------------------"<<endl;
 }
 entity::entity(const entity &obj){
     name = obj.name;
@@ -46,6 +57,7 @@ entity::entity(const entity &obj){
 
     entityCount++;
     cout<<"Copy Constructor Running...";
+    cout<<"--------------------------"<<endl;
 }
 
 entity::~entity(){
@@ -76,9 +88,9 @@ entity& entity::setHealth(int health){
     this-> health = health;
     return *this;
 }
-entity& entity::setAbilities(const int x, string abilities[]){
-    aCount = x;
-    abilities = new string[aCount];
+entity& entity::setAbilities(const int aCount, string abilities[]){
+
+    this->abilities = new string[aCount];
     for (int i = 0; i < aCount; i++)
     {
      this-> abilities[i] = abilities[i];
@@ -109,20 +121,31 @@ float entity::getWeight(){
 int entity::getHealth(){
     return health;
 };
-string entity::getAbilities(){
-    return abilities[aCount];
+string* entity::getAbilities(){
+    return abilities;
 };
 
 void entity::getFromFile(){
     ifstream fin("entity.txt");
-    for (int i = 0; i < entityCount; i++)
-    {
+
         fin>>name>>color>>age>>height>>weight>>health;
         for (int i = 0; i <aCount ; i++)
         {
             fin>>abilities[i];
         }   
-    }
+    fin.close();
+}
+void entity::writeToFile(){
+    ofstream fout("entity.txt",ios::app);
+
+    fout<<name<<" "<<color<<" "<<age<<" "<<height<<" "<<weight<<" "<<health<<" ";
+        for (int i = 0; i <aCount ; i++)
+        {
+            fout<<abilities[i]<<" ";
+    
+        }   
+        cout<<endl;
+        fout.close();
 }
 
 int entity::totalEntites(){
@@ -141,10 +164,12 @@ void entity::display(){
     cout<<"Health: "<<health<<endl;
     cout<<"--------------------------"<<endl;
     cout<<"Abilities:"<<endl;
+    string *abilities = getAbilities();
     for (int i = 0; i < aCount; i++)
     {
-        cout<<"Ability-["<<i+1<<"]"<<abilities[i]<<endl;
+        cout<<"Ability#"<<i+1<<": "<<abilities[i]<<endl;
     }
+    cout<<endl;
     cout<<"      END OF DISPLAY"<<endl;
     cout<<"--------------------------"<<endl;
 }

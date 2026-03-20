@@ -3,15 +3,20 @@
 using namespace std;
 
 int main(){
-    string *abilities;
-    abilities = new string[3];
-    cout<<"Enter Abilities: "<<endl;
-    for (int i = 0; i < 3; i++)
+    const int entities = 3;
+    entity e[entities]={
+        entity("Steve","White", 34, 174, 63, 500, 1),
+        entity("enderman","Black", 1000, 230, 75, 1000, 3),
+        entity("villager","Brown", 45, 170, 70, 100, 0)
+    };
+
+    for (int i = 0; i < entities; i++)
     {
-        cout<<"Enter Ability-["<<i+1<<"]"<<endl;
-        cin>>abilities[i];
+        e[i].display();
+    }
+    for (int i = 0; i < entities; i++)
+    {
+        e[i].writeToFile();
     }
     
-    entity e("Steve","Brown", 34, 174, 63, 500, 3, abilities);
-    e.display();
 }
