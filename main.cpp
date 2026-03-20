@@ -18,5 +18,4 @@ int main(){
     {
         e[i].writeToFile();
     }
-    
 }
